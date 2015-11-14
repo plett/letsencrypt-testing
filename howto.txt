@@ -1,0 +1,5 @@
+in /etc/letsencrypt/live/plett.uk :
+cat cert.pem chain.pem privkey.pem > combined.pem
+haproxy needs private key and cert+chain in one pem
+
+docker run -it --rm -p 80:80 --name letsencrypt -v /etc/letsencrypt:/etc/letsencrypt -v /var/lib/letsencrypt:/var/lib/letsencrypt quay.io/letsencrypt/letsencrypt:latest certonly --agree-dev-preview --server https://acme-v01.api.letsencrypt.org/directory

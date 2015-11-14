@@ -1,0 +1,22 @@
+nginx:
+    image: nginx
+    volumes:
+        - ./webroot:/usr/share/nginx/html
+
+haproxy:
+    image: million12/haproxy
+    ports:
+     - 80:80
+     - 443:443
+    volumes:
+    - ./haproxy:/etc/haproxy:ro
+    - /etc/letsencrypt:/etc/letsencrypt:ro
+
+#letsencrypt:
+#    image: quay.io/letsencrypt/letsencrypt:latest
+#    ports:
+#     - 80:80
+#    volumes:
+#     - /etc/letsencrypt:/etc/letsencrypt
+#     - /var/lib/letsencrypt:/var/lib/letsencrypt
+#    command: certonly --text --agree-dev-preview --server https://acme-v01.api.letsencrypt.org/directory --domain plett.uk --renew
